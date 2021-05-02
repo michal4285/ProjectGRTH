@@ -8,6 +8,7 @@ import Pagination from "../../_components/pagination/pagination";
 function ListPage() {
   const list = useSelector((state) => state.list);
   const [currentItems, setCurrentItems] = useState([]);
+  const [selectedPositions, setSelectedPositions] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -24,12 +25,33 @@ function ListPage() {
     setCurrentItems(pager.items);
   }
 
-  const positions = [{
-    lat: 43.656132,
-    lng: -79.380423,
-    title: "test title",
-    description: "test description"
-  }]
+  function onRowSelected(item) {
+    const mapPositions = [
+      {
+        key: item.id,
+        lat: item.positions[0].lat,
+        lng: item.positions[0].lng,
+        title: `userId ${item.userId}`,
+        description: item.title,
+      },{
+        key: item.id,
+        lat: item.positions[1].lat,
+        lng: item.positions[1].lng,
+        title: `userId ${item.userId}`,
+        description: item.title,
+      }
+    ];
+    setSelectedPositions(mapPositions);
+  }
+
+  const positions = [
+    {
+      lat: 43.656132,
+      lng: -79.380423,
+      title: "test title",
+      description: "test description",
+    },
+  ];
 
   return (
     <>
@@ -44,7 +66,14 @@ function ListPage() {
               {currentItems && (
                 <ul>
                   {currentItems.map((item, index) => (
-                    <li key={item.id}>{item.title}</li>
+                    <li
+                      key={item.id}
+                      onClick={() => {
+                        onRowSelected(item);
+                      }}
+                    >
+                      {item.title}
+                    </li>
                   ))}
                 </ul>
               )}
@@ -53,9 +82,7 @@ function ListPage() {
           </div>
         </div>
         <div className="col-3">
-          <Map
-            positions={positions}
-          />
+          {selectedPositions && <Map positions={selectedPositions} />}
         </div>
       </div>
     </>

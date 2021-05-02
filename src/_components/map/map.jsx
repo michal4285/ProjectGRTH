@@ -6,7 +6,6 @@ import {
   Marker,
   InfoWindow,
 } from "react-google-maps";
-import mapStyles from "./mapStyles";
 
 function MapPosition({ positions }) {
   const [selectedPosition, setSelectedPosition] = useState(null);
@@ -25,13 +24,14 @@ function MapPosition({ positions }) {
   }, []);
   return (
     <GoogleMap
-      defaultZoom={19}
+      key={new Date().getTime()}
+      defaultZoom={15}
       defaultCenter={{ lat: 43.6561, lng: -79.3802 }}
-      options={{ styles: mapStyles }}
     >
       {positions.map((position) => {
         return (
           <Marker
+            key={position.key}
             position={{
               lat: position.lat,
               lng: position.lng,
@@ -69,6 +69,16 @@ function MapPosition({ positions }) {
 
 const MapWrapped = withScriptjs(withGoogleMap(MapPosition));
 
+/* 
+example: 
+  const positions = [{
+    key:1,
+    lat: 43.656132,
+    lng: -79.380423,
+    title: "test title",
+    description: "test description"
+  }]
+*/
 export default function Map({ positions }) {
   return (
     <div style={{ width: "30vw", height: "100vh" }}>
