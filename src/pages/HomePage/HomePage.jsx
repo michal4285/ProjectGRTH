@@ -39,6 +39,7 @@ function HomePage() {
             }
             <p>
                 <Link to="/login">Logout</Link>
+                <Link to="/list">go to list</Link>
             </p>
         </div>
     );

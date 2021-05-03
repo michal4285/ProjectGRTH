@@ -11,11 +11,11 @@ export const userActions = {
     delete: _delete
 };
 
-function login(username, password, from) {
+function login(mail, password, from) {
     return dispatch => {
-        dispatch(request({ username }));
+        dispatch(request({ mail }));
 
-        userService.login(username, password)
+        userService.login(mail, password)
             .then(
                 user => { 
                     dispatch(success(user));

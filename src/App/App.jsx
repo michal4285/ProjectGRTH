@@ -9,6 +9,8 @@ import { HomePage } from 'root/pages/HomePage';
 import { LoginPage } from 'root/pages/LoginPage';
 import { RegisterPage } from 'root/pages/RegisterPage';
 import { ListPage } from 'root/pages/ListPage';
+import {Login}from '../pages/LoginPage/login'
+import {Register} from '../pages/LoginPage/register'
 
 function App() {
     const alert = useSelector(state => state.alert);
@@ -24,16 +26,17 @@ function App() {
     return (
         <div className="jumbotron">
             <div className="container">
-                <div className="col-md-8 offset-md-2">
+                <div >
                     {alert.message &&
                         <div className={`alert ${alert.type}`}>{alert.message}</div>
                     }
                     <Router history={history}>
                         <Switch>
                             <PrivateRoute exact path="/" component={HomePage} />
-                            <Route path="/login" component={LoginPage} />
-                            <Route path="/register" component={RegisterPage} />
+                            <Route path="/login1" component={LoginPage} />
+                            <Route path="/register" component={Register} />
                             <Route path="/list" component={ListPage} />
+                            <Route path="/login" component={Login} />
                             <Redirect from="*" to="/" />
                         </Switch>
                     </Router>

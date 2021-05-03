@@ -35,13 +35,14 @@ class Pagination extends React.Component {
             this.styles = {
                 ul: {
                     margin: 0,
-                    padding: 0,
+                    padding: 30,
                     display: 'inline-block'
                 },
                 li: {
                     listStyle: 'none',
                     display: 'inline',
                     textAlign: 'center'
+                
                 },
                 a: {
                     cursor: 'pointer',
